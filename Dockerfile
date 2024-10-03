@@ -1,4 +1,4 @@
-FROM golang:1.23 as builder
+FROM 641016094908.dkr.ecr.us-east-1.amazonaws.com/gagarinx/golang:1.23 as builder
 
 WORKDIR /workspace
 
