@@ -22,7 +22,7 @@ func main() {
 	for {
 		for i := maxBottles; i >= 0; i-- {
 			if i == 0 {
-				fmt.Printf("No bottles of beer on the table, I order another %d bottles of beer!\n", maxBottles)
+				fmt.Printf("Zero bottles of beer on the table, I order another %d bottles of beer!\n", maxBottles)
 			} else {
 				fmt.Printf("%d bottles of beer on the table, I get one and there's %d bottles left\n", i, i - 1)
 			}
