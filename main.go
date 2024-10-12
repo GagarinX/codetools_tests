@@ -2,32 +2,18 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"strconv"
-	"time"
+	"net/http"
 )
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, World!")
+}
+
 func main() {
-	maxBottlesS, ok := os.LookupEnv("MAX_BOTTLES")
-	if !ok {
-		maxBottlesS = "999"
-	}
+	http.HandleFunc("/", handler)
 
-	maxBottles, err := strconv.Atoi(maxBottlesS)
+	err := http.ListenAndServe(":80", nil)
 	if err != nil {
-		log.Fatalf("Error converting MAX_BOTTLES env to int: %s", err.Error())
+		fmt.Println("Error starting server:", err)
 	}
-
-	for {
-		for i := maxBottles; i >= 0; i-- {
-			if i == 0 {
-				fmt.Printf("Zero bottles of beer on the table, I order %d bottles of beer again!\n", maxBottles)
-			} else {
-				fmt.Printf("%d UPDATED bottles of beer on the table, I get one and there are %d bottles left\n", i, i - 1)
-			}
-			time.Sleep(time.Second)
-		}
-	}
-	
 }
