@@ -1,22 +1,20 @@
 version: 0.0
 os: linux
 files:
-  - source: /scripts/
-    destination: /tmp/scripts
-  - source: /bottles
+  - source: bottles
     destination: /opt/bottles
 file_exists_behavior: OVERWRITE
 
 hooks:
   AfterInstall:
-    - location: /tmp/scripts/create-systemd-service.sh
+    - location: scripts/create-systemd-service.sh
       timeout: 60
       runas: root
   ApplicationStart:
-    - location: /tmp/scripts/start-service.sh
+    - location: scripts/start-service.sh
       timeout: 60
       runas: root
   ApplicationStop:
-    - location: /tmp/scripts/stop-service.sh
+    - location: scripts/stop-service.sh
       timeout: 60
       runas: root
