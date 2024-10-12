@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: bottles
-    destination: /opt/bottles
+    destination: /opt
 file_exists_behavior: OVERWRITE
 
 hooks:
