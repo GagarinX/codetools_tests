@@ -24,7 +24,7 @@ func main() {
 			if i == 0 {
 				fmt.Printf("Zero bottles of beer on the table, I order %d bottles of beer again!\n", maxBottles)
 			} else {
-				fmt.Printf("%d bottles of beer on the table, I get one and there are %d bottles left\n", i, i - 1)
+				fmt.Printf("%d UPDATED bottles of beer on the table, I get one and there are %d bottles left\n", i, i - 1)
 			}
 			time.Sleep(time.Second)
 		}
