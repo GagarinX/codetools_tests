@@ -12,6 +12,6 @@ phases:
       - docker build -t bottles .
       - docker create --name bottles bottles
       - docker cp bottles:/bottles ./bottles
-      - tar -czvf bottles.tar.gz .
+      - tar -czvf bottles.tar.gz bottles appspec.yml
       - aws s3 cp bottles.tar.gz s3://$OUTPUT_BUCKET/bottles.tar.gz
 
