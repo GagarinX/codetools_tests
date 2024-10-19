@@ -14,3 +14,5 @@ WORKDIR /
 COPY --from=builder /workspace/bottles .
 
 ENTRYPOINT ["/bottles"]
+
+
