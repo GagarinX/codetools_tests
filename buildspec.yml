@@ -9,9 +9,10 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker build -t bottles .
-      - docker create --name bottles bottles
-      - docker cp bottles:/bottles ./bottles
-      - tar -czvf bottles.tar.gz bottles appspec.yml scripts
-      - aws s3 cp bottles.tar.gz s3://$OUTPUT_BUCKET/bottles.tar.gz
-
+      - export IMAGE_TAG=$(echo $CODEBUILD_SOURCE_VERSION | tr '/' '-')
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
