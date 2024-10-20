@@ -1,20 +1,9 @@
 version: 0.0
-os: linux
-files:
-  - source: bottles
-    destination: /opt
-file_exists_behavior: OVERWRITE
-
-hooks:
-  AfterInstall:
-    - location: scripts/create-systemd-service.sh
-      timeout: 60
-      runas: root
-  ApplicationStart:
-    - location: scripts/start-service.sh
-      timeout: 60
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop-service.sh
-      timeout: 60
-      runas: root
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: <TASK_DEFINITION>
+        LoadBalancerInfo:
+          ContainerName: "bottles"
+          ContainerPort: 8080
